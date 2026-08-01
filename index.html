@@ -56,9 +56,9 @@ button:hover {
 
 <p>勝てば次の手がかりを獲得できる</p>
 
-<button onclick="play('✊グー')">✊ グー</button>
-<button onclick="play('✌チョキ')">✌ チョキ</button>
-<button onclick="play('🖐パー')">🖐 パー</button>
+<button onclick="play('グー')">✊ グー</button>
+<button onclick="play('チョキ')">✌ チョキ</button>
+<button onclick="play('パー')">🖐 パー</button>
 
 <div id="hands">
   あなた：？　 CPU：？
@@ -73,7 +73,12 @@ button:hover {
 
 function play(player) {
 
-  const hands = ["✊グー", "✌チョキ", "🖐パー"];
+  const emoji = {
+    "グー": "✊",
+    "チョキ": "✌",
+    "パー": "🖐"
+  };
+  const hands = ["グー", "チョキ", "パー"];
   const cpu = hands[Math.floor(Math.random() * 3)];
 
   // まずプレイヤーだけ表示
@@ -88,7 +93,7 @@ function play(player) {
   setTimeout(() => {
 
     document.getElementById("hands").textContent =
-      `あなた：${player}　 CPU：${cpu}`;
+  `あなた：${emoji[player]}${player}　 CPU：${emoji[cpu]}${cpu}`;
 
 
     let result = "";
@@ -99,9 +104,9 @@ function play(player) {
     }
 
     else if (
-      (player === "✊グー" && cpu === "✌チョキ") ||
-      (player === "✌チョキ" && cpu === "🖐パー") ||
-      (player === "🖐パー" && cpu === "✊グー")
+      (player === "グー" && cpu === "チョキ") ||
+      (player === "チョキ" && cpu === "パー") ||
+      (player === "パー" && cpu === "グー")
     ) {
 
       result =
