@@ -73,7 +73,7 @@ button:hover {
 
 function play(player) {
 
-  const hands = ["グー", "チョキ", "パー"];
+  const hands = ["✊グー", "✌チョキ", "🖐パー"];
   const cpu = hands[Math.floor(Math.random() * 3)];
 
   document.getElementById("hands").textContent =
@@ -85,9 +85,9 @@ function play(player) {
     result = "あいこ…残念";
   }
   else if (
-    (player === "グー" && cpu === "チョキ") ||
-    (player === "チョキ" && cpu === "パー") ||
-    (player === "パー" && cpu === "グー")
+    (player === "✊グー" && cpu === "✌チョキ") ||
+    (player === "✌チョキ" && cpu === "🖐パー") ||
+    (player === "🖐パー" && cpu === "✊グー")
   ) {
 
     result =
