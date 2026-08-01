@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>じゃんけん</title>
+
+<style>
+body {
+  font-family: sans-serif;
+  text-align: center;
+  padding: 40px;
+}
+
+button {
+  font-size: 24px;
+  padding: 12px 25px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  background: #4CAF50;
+  color: white;
+}
+
+button:hover {
+  background: #45a049;
+}
+
+#hands {
+  font-size: 50px;
+  margin: 30px;
+}
+
+#result {
+  margin-top: 30px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.win {
+  color: #d4af37;
+  font-size: 26px;
+}
+
+.lose {
+  color: #555;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>CPUとじゃんけん勝負！</h1>
+
+<p>勝てば次の手がかりを獲得できる</p>
+
+<button onclick="play('グー')">✊ グー</button>
+<button onclick="play('チョキ')">✌ チョキ</button>
+<button onclick="play('パー')">🖐 パー</button>
+
+<div id="hands">
+  あなた：？　 CPU：？
+</div>
+
+<div id="result">
+  じゃんけん開始！
+</div>
+
+
+<script>
+
+function play(player) {
+
+  const hands = ["グー", "チョキ", "パー"];
+  const cpu = hands[Math.floor(Math.random() * 3)];
+
+  document.getElementById("hands").textContent =
+    `あなた：${player}　 CPU：${cpu}`;
+
+  let result = "";
+
+  if (player === cpu) {
+    result = "あいこ…残念";
+  }
+  else if (
+    (player === "グー" && cpu === "チョキ") ||
+    (player === "チョキ" && cpu === "パー") ||
+    (player === "パー" && cpu === "グー")
+  ) {
+
+    result =
+    "🎉 勝利！<br><br>" +
+    "ヒント：社務所に入ることが、次への手がかりになりそうだ。<br>" +
+    "そのためには、まず鈴の行方を探る必要がある。<br>" +
+    "もう一度、境内の人々に話を聞きながら、鈴がどこにあったのか手がかりを集めてみよう。";
+
+    document.getElementById("result").className = "win";
+
+  }
+  else {
+    result = "残念";
+    document.getElementById("result").className = "lose";
+  }
+
+
+  document.getElementById("result").innerHTML = result;
+
+}
+
+</script>
+
+</body>
+</html>
