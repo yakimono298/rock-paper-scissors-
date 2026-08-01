@@ -73,39 +73,56 @@ button:hover {
 
 function play(player) {
 
-  const hands = ["✊グー", "✌チョキ", "🖐パー"];
+  const hands = ["グー", "チョキ", "パー"];
   const cpu = hands[Math.floor(Math.random() * 3)];
 
+  // まずプレイヤーだけ表示
   document.getElementById("hands").textContent =
-    `あなた：${player}　 CPU：${cpu}`;
+    `あなた：${player}　 CPU：🤔`;
 
-  let result = "";
+  // 結果表示を一旦変更
+  document.getElementById("result").textContent =
+    "CPUが考えています…";
 
-  if (player === cpu) {
-    result = "あいこ…残念";
-  }
-  else if (
-    (player === "✊グー" && cpu === "✌チョキ") ||
-    (player === "✌チョキ" && cpu === "🖐パー") ||
-    (player === "🖐パー" && cpu === "✊グー")
-  ) {
+  // 1秒後にCPUの手と結果を表示
+  setTimeout(() => {
 
-    result =
-    "🎉 勝利！<br><br>" +
-    "ヒント：社務所に入ることが、次への手がかりになりそうだ。<br>" +
-    "そのためには、まず鈴の行方を探る必要がある。<br>" +
-    "もう一度、境内の人々に話を聞きながら、鈴がどこにあったのか手がかりを集めてみよう。";
-
-    document.getElementById("result").className = "win";
-
-  }
-  else {
-    result = "残念";
-    document.getElementById("result").className = "lose";
-  }
+    document.getElementById("hands").textContent =
+      `あなた：${player}　 CPU：${cpu}`;
 
 
-  document.getElementById("result").innerHTML = result;
+    let result = "";
+
+    if (player === cpu) {
+      result = "残念";
+      document.getElementById("result").className = "lose";
+    }
+
+    else if (
+      (player === "グー" && cpu === "チョキ") ||
+      (player === "チョキ" && cpu === "パー") ||
+      (player === "パー" && cpu === "グー")
+    ) {
+
+      result =
+      "🎉 勝利！<br><br>" +
+      "ヒント：社務所に入ることが、次への手がかりになりそうだ。<br>" +
+      "そのためには、まず鈴の行方を探る必要がある。<br>" +
+      "もう一度、境内の人々に話を聞きながら、鈴がどこにあったのか手がかりを集めてみよう。";
+
+      document.getElementById("result").className = "win";
+
+    }
+
+    else {
+      result = "残念";
+      document.getElementById("result").className = "lose";
+    }
+
+
+    document.getElementById("result").innerHTML = result;
+
+  }, 1000);
 
 }
 
